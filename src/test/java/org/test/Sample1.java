@@ -1,0 +1,40 @@
+package org.test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Sample1{
+	public static void main(String[] args) throws Throwable {
+		File f = new File("C:\\Users\\dynam\\OneDrive\\Desktop\\Excel1Write.xlsx");
+		FileInputStream f2 = new FileInputStream(f);
+		Workbook w = new XSSFWorkbook(f2);
+		Sheet s = w.getSheet("Excel");
+		for(int i = 0; i < s.getPhysicalNumberOfRows(); i++) {
+			Row r = s.getRow(i);
+			for(int j = 0; j < r.getPhysicalNumberOfCells(); j++) {
+				Cell cell = r.getCell(j);
+				int cellType = cell.getCellType();
+				if(cellType==1) {
+					String value = cell.getStringCellValue();
+					if(value.equals("Lokesh")) {
+						cell.setCellValue("Karthick");
+					}
+				}
+			}
+		}
+		FileOutputStream f1 = new FileOutputStream(f);
+		w.write(f1);
+		f1.close();	
+	}
+}
