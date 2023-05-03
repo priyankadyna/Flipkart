@@ -46,7 +46,8 @@ public class Redmimobiles extends keywords{
 			}
 			FileOutputStream f2 = new FileOutputStream(f);
 			w.write(f2);
-			f2.close();		
+			f2.close();	
+                  System.out.println("Newly updated");	
 		}
 		catch(Exception e){
 			System.out.println(e.toString());
